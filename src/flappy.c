@@ -1,3 +1,5 @@
+#ifdef FLAPPY
+
 #include "myevic.h"
 #include "dataflash.h"
 #include "display.h"
@@ -702,3 +704,4 @@ __myevic__ void fbStartGame()
 		fbCreateTimeout( fbStartScreen + 1 );
 	}
 }
+#endif

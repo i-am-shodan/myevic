@@ -491,7 +491,9 @@ __myevic__ void GetUserInput()
 				{
 					gFlags.playing_fb = 0;
 					Event = 0;
+#ifdef FLAPPY
 					fbInitTimeouts();
+#endif
 					MainView();
 				}
 			}

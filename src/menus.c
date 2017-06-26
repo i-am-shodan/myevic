@@ -1116,7 +1116,7 @@ __myevic__ void Object3DOnClick()
 
 
 //-----------------------------------------------------------------------------
-
+#ifdef FLAPPY
 __myevic__ void GameMEnter()
 {
 	CurrentMenuItem = dfFBSpeed;
@@ -1132,6 +1132,7 @@ __myevic__ void GameIClick()
 {
 	fbStartGame();
 }
+#endif
 
 //-----------------------------------------------------------------------------
 
@@ -1472,6 +1473,7 @@ const mbitdesc_t InvBitDesc =
 	String_On
 };
 
+#ifdef FLAPPY
 const menu_t GameMenu =
 {
 	String_Game,
@@ -1489,6 +1491,7 @@ const menu_t GameMenu =
 		{ String_Back, 0, EVENT_PARENT_MENU, 0 }
 	}
 };
+#endif
 
 const menu_t ModesMenu =
 {
@@ -1795,9 +1798,14 @@ const menu_t MiscsMenu =
 	0,
 	0,
 	0,
+#ifdef FLAPPY
 	4,
 	{
 		{ String_Game, &GameMenu, 0, MACTION_SUBMENU },
+#else
+	3,
+	{
+#endif
 		{ String_Led, &LedMenu, 0, MACTION_SUBMENU },
 		{ String_3D, &Object3DMenu, 0, MACTION_SUBMENU },
 		{ String_Back, 0, EVENT_PARENT_MENU, 0 }

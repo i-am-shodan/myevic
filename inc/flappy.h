@@ -1,6 +1,8 @@
 #ifndef __FLAPPY_BIRD_H__
 #define __FLAPPY_BIRD_H__
 
+#ifdef FLAPPY
+
 //=========================================================================
 
 extern void fbInitTimeouts();
@@ -15,5 +17,7 @@ extern void fbBirdAnim( int );
 extern void fbStartGame();
 
 //=========================================================================
+
+#endif
 
 #endif /* __FLAPPY_BIRD_H__ */

@@ -820,6 +820,7 @@ __myevic__ void Main()
 
 	while ( 1 )
 	{
+#ifdef FLAPPY
 		while ( gFlags.playing_fb )
 		{
 			// Flappy Bird game loop
@@ -842,6 +843,7 @@ __myevic__ void Main()
 				DataFlashUpdateTick();
 			}
 		}
+#endif
 
 		if ( gFlags.firing )
 		{

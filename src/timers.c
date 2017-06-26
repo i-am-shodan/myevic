@@ -111,6 +111,7 @@ __myevic__ void TMR2_IRQHandler()
 			gFlags.tick_100hz = 1;
 		}
 
+#ifdef FLAPPY
 		if ( gFlags.playing_fb )
 		{
 			if ( (!(TMR2Counter % 16) && dfFBSpeed == 0)
@@ -120,6 +121,7 @@ __myevic__ void TMR2_IRQHandler()
 				fbTickTimeouts();
 			}
 		}
+#endif
 	}
 }
 

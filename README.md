@@ -517,7 +517,8 @@ If you continue holding Fire and Right (+) buttons after entering menus, after t
         *On boxes with built-in battery (AIO, Basic, eGrip II, Cuboid Mini), this option should be kept on the "GEN" setting unless you've taken your box apart and manualy replaced the internal battery pack by something else.*  
 
   * BadUSB
-        BadUSB submenu 
+
+        BadUSB submenu. 
         Selection from a number of attacks you want to run. You will need to code these yourself
         See BadUSB.c
 

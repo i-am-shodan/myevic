@@ -3,6 +3,7 @@
 
 #include "vcom.h"
 #include "storage.h"
+#include "keyboard.h"
 
 //=========================================================================
 // Many parts are from Nuvoton sample code
@@ -71,6 +72,13 @@
 //=========================================================================
 
 extern const uint8_t usbdHIDReport[27];
+
+extern const uint8_t usbdDevice[];
+extern const uint8_t *usbdStrings[];
+extern const uint8_t* usbdHIDReportDesc[];
+extern const uint32_t usbdHIDReportSize[];
+extern const uint32_t usbdConfigHidDescIdx[];
+
 
 //-------------------------------------------------------------------------
 

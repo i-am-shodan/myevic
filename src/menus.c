@@ -9,6 +9,7 @@
 #include "meusbd.h"
 #include "atomizer.h"
 #include "battery.h"
+#include "badusb.h"
 
 //=============================================================================
 // MENUS
@@ -731,6 +732,27 @@ __myevic__ int PreheatMEvent( int event )
 
 //-----------------------------------------------------------------------------
 
+__myevic__ void BadUSBMenuIDraw(int it, int line, int sel)
+{
+	return;
+}
+
+__myevic__ void BadUSBOnClick()
+{
+	// you will need to change 4 to the respective back menu item
+	// in the menu definition at the bottom of this file
+	if (CurrentMenuItem == 4)
+	{
+		UpdateDataFlash();
+	}
+	else
+	{
+		BadUSB(CurrentMenuItem);
+	}
+
+	gFlags.refresh_display = 1;
+}
+
 __myevic__ void BVOMenuIDraw( int it, int line, int sel )
 {
 	if ( !it )
@@ -822,7 +844,12 @@ __myevic__ void ExpertMenuIDraw( int it, int line, int sel )
 			DrawString( GetBatteryName(), 36, line+2 );
 			break;
 
-		case 8:	// BVO
+		case 8: // BadUSB
+			break;
+
+		case 9:	// BVO
+			break;
+
 		default:
 			break;
 	}
@@ -836,14 +863,17 @@ __myevic__ void ExpertMenuOnClick()
 			if ( dfStatus.vcom )
 			{
 				dfStatus.vcom = 0;
+				dfStatus.keyboard = 0;
 				dfStatus.storage = 1;
 			}
 			else if ( dfStatus.storage )
 			{
+				dfStatus.keyboard = 0;
 				dfStatus.storage = 0;
 			}
 			else
 			{
+				dfStatus.keyboard = 0;
 				dfStatus.vcom = 1;
 			}
 			InitUSB();
@@ -881,10 +911,13 @@ __myevic__ void ExpertMenuOnClick()
 			SetBatteryModel();
 			break;
 
-		case 8:	// BVO
+		case 8: // BadUSB
 			break;
 
-		case 9:	// Back
+		case 9:	// BVO
+			break;
+
+		case 10:	// Back
 			UpdateDataFlash();
 			break;
 	}
@@ -1930,6 +1963,24 @@ const menu_t BVOMenu =
 	}
 };
 
+const menu_t BadUSBMenu =
+{
+	String_BadUSB,
+	&ExpertMenu,
+	0,
+	BadUSBMenuIDraw + 1,
+	0,
+	BadUSBOnClick + 1,
+	0,
+	4,
+	{
+		{ String_FakeUpdate, 0, 0, 0 },
+		{ String_PSUAC, 0, 0, 0 },
+		{ String_PSStore, 0, 0, 0 },
+		{ String_Back, 0, EVENT_PARENT_MENU, 0 }
+	}
+};
+
 const menu_t ExpertMenu =
 {
 	String_Expert,
@@ -1939,7 +1990,7 @@ const menu_t ExpertMenu =
 	0,
 	ExpertMenuOnClick+1,
 	ExpertMenuOnEvent+1,
-	10,
+	11,
 	{
 		{ String_USB, 0, 0, 0 },
 		{ String_DBG, 0, 0, 0 },
@@ -1949,6 +2000,7 @@ const menu_t ExpertMenu =
 		{ String_SHR, 0, 0, 0 },
 		{ String_UCH, 0, 0, 0 },
 		{ String_BAT, 0, 0, 0 },
+		{ String_BadUSB, &BadUSBMenu, 0, MACTION_SUBMENU },
 		{ String_BVO, &BVOMenu, 0, MACTION_SUBMENU },
 		{ String_Back, 0, EVENT_PARENT_MENU, 0 }
 	}

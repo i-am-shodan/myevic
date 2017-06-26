@@ -206,7 +206,6 @@ const S_USBD_INFO_T usbdMSCDescriptors =
 	usbdConfigHidDescIdx
 };
 
-
 //=========================================================================
 //-------------------------------------------------------------------------
 __myevic__ void USBD_IRQHandler(void)
@@ -361,7 +360,11 @@ __myevic__ void usbdClassRequest()
 
 	USBD_GetSetupPacket( token );
 
-	if ( ( token[0] & 0x1F ) == 1 )
+	if (dfStatus.keyboard)
+	{
+		KBD_ClassRequest(token);
+	}
+	else if ( ( token[0] & 0x1F ) == 1 )
 	{
 		if (( dfStatus.vcom ) && ( token[4] == VCOM_INTERFACE ))
 		{
@@ -514,6 +517,10 @@ __myevic__ void InitUSB()
 		USBD_Open( &usbdMSCDescriptors, usbdClassRequest+1, 0 );
 		USBD_SetConfigCallback( MSC_SetConfig );
 		MSC_Init();
+	}
+	else if (dfStatus.keyboard)
+	{
+		USBD_Open( &usbdKBDDescriptors, usbdClassRequest + 1, 0 );
 	}
 	else
 	{

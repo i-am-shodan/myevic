@@ -298,7 +298,10 @@ extern const uint8_t String_Curve[];
 extern const uint8_t String_Enable[];
 extern const uint8_t String_Reset[];
 extern const uint8_t String_Splash[];
-
+extern const uint8_t String_BadUSB[];
+extern const uint8_t String_FakeUpdate[];
+extern const uint8_t String_PSUAC[];
+extern const uint8_t String_PSStore[];
 
 //==============================================================================
 
